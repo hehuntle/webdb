@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  web-server:
+    build:
+      context: ./ui
+    ports:
+      - 5000:5000 # host : container
+    volumes:
+      - ./ui/src:/app
+    container_name: one
+
+  db-server:
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql # persistent DB when container is stopped
+    container_name: home_db
+
+volumes:
+  database:
